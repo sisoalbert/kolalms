@@ -5,11 +5,12 @@ import About from "./pages/About";
 import Signup from "./pages/Signup";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import NavigationBar from "./components/NavigationBar";
+import NavBar from "./components/NavBar/NavBar";
 
 function App() {
   return (
     <Router>
-      <NavigationBar />
+      <NavBar />
       <Switch>
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={Signup} />
