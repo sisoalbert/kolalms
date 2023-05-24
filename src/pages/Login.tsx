@@ -10,6 +10,7 @@ import {
   Button,
   Heading,
   Text,
+  Image,
   useColorModeValue,
 } from "@chakra-ui/react";
 
@@ -68,6 +69,11 @@ function Login() {
           </Box>
         </Stack>
       </Flex>
+
+      <Box boxSize="sm">
+        <Image src="https://bit.ly/dan-abramov" alt="Dan Abramov" />
+      </Box>
+
       <Box
         bgImage="url('../assets/login.png')" // Replace with your image path
         bgSize="cover"
