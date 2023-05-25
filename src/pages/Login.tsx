@@ -18,10 +18,19 @@ function Login() {
   return (
     <Flex
       minH={"100vh"}
+      direction={{ base: "column-reverse", md: "row" }}
       align={{ base: "center", md: "stretch" }}
       justify={"center"}
       bg={useColorModeValue("gray.50", "gray.800")}
     >
+      <Box
+        width={{ base: "100%", md: "50%" }}
+        bgPosition="center"
+        bgSize="cover"
+      >
+        <Image src={require("../assets/login.png")} alt="login image" />
+      </Box>
+
       <Flex
         direction={{ base: "column", md: "row" }}
         rounded={"lg"}
@@ -69,14 +78,6 @@ function Login() {
           </Box>
         </Stack>
       </Flex>
-
-      <Box
-        width={{ base: "100%", md: "50%" }}
-        bgPosition="center"
-        bgSize="cover"
-      >
-        <Image src={require("../assets/login.png")} alt="login image" />
-      </Box>
     </Flex>
   );
 }
