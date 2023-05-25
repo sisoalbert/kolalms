@@ -11,6 +11,7 @@ import {
   Icon,
   Link,
   Popover,
+  Image,
   PopoverTrigger,
   PopoverContent,
   useColorModeValue,
@@ -59,15 +60,21 @@ function NavBar() {
             />
           </Flex>
           <Flex flex={{ base: 1 }} justify={{ base: "center", md: "start" }}>
-            <Text
-              textAlign={useBreakpointValue({ base: "center", md: "left" })}
-              fontFamily={"heading"}
-              color={useColorModeValue("gray.800", "white")}
+            <NavLink to="/">
+              <Box>
+                <Image
+                  // width={{ base: "100%", md: "100%" }}
+                  height={{ base: "50px", md: "50px" }}
+                  src={require("../../assets/logo.png")}
+                  alt="KolaLMS"
+                />
+              </Box>
+            </NavLink>
+            <Flex
+              alignItems={"center"}
+              display={{ base: "none", md: "flex" }}
+              ml={10}
             >
-              KolaLMS
-            </Text>
-
-            <Flex display={{ base: "none", md: "flex" }} ml={10}>
               <DesktopNav />
             </Flex>
           </Flex>
@@ -87,7 +94,7 @@ function NavBar() {
                 bg={"white"}
                 href={"#"}
                 _hover={{
-                  bg: "pink.300",
+                  bg: "blue.300",
                 }}
               >
                 Sign In
@@ -100,13 +107,13 @@ function NavBar() {
                 fontSize={"sm"}
                 fontWeight={600}
                 color={"white"}
-                bg={"pink.400"}
+                bg={"#0B5CFF"}
                 href={"#"}
                 _hover={{
-                  bg: "pink.300",
+                  bg: "blue.300",
                 }}
               >
-                Sign Up
+                Contact sales
               </Button>
             </NavLink>
           </Stack>
@@ -115,7 +122,7 @@ function NavBar() {
         <Collapse in={isOpen} animateOpacity>
           <MobileNav />
         </Collapse>
-      </Box>{" "}
+      </Box>
     </>
   );
 }

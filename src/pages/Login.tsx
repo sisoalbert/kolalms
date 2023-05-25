@@ -70,16 +70,13 @@ function Login() {
         </Stack>
       </Flex>
 
-      <Box boxSize="sm">
-        <Image src="https://bit.ly/dan-abramov" alt="Dan Abramov" />
-      </Box>
-
       <Box
-        bgImage="url('../assets/login.png')" // Replace with your image path
-        bgSize="cover"
-        bgPosition="center"
         width={{ base: "100%", md: "50%" }}
-      />
+        bgPosition="center"
+        bgSize="cover"
+      >
+        <Image src={require("../assets/login.png")} alt="login image" />
+      </Box>
     </Flex>
   );
 }
