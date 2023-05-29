@@ -9,18 +9,19 @@ import Dashboard from "./pages/Dashboard";
 import PrivateRoute from "./pages/PrivateRoute";
 import { Provider } from "react-redux";
 import store from "./state/store";
+import Media from "./pages/Media";
 
 function App() {
   return (
     <Provider store={store}>
       <Router>
-        <NavBar />
         <Switch>
           <Route exact path="/login" component={Login} />
           <Route exact path="/signup" component={Signup} />
           <Route exact path="/about" component={About} />
           <Route exact path="/" component={Home} />
           <PrivateRoute path="/dashboard" component={Dashboard} />
+          <PrivateRoute path="/media" component={Media} />
         </Switch>
       </Router>
     </Provider>

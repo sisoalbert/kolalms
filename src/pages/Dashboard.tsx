@@ -18,11 +18,13 @@ import {
   Container,
 } from "@chakra-ui/react";
 import { EditIcon, ViewIcon } from "@chakra-ui/icons";
+import { Link as NavLink } from "react-router-dom";
 
 import React, { useState, useEffect } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../firebase/firebase";
 import logo from "../assets/logoM.png";
+import NavBar from "../components/NavBar/NavBar";
 
 export default function Dashboard() {
   const [user, setUser] = useState(null);
@@ -103,42 +105,44 @@ export default function Dashboard() {
         autoFlow="row dense"
       >
         {courses.map((course) => (
-          <Box
-            sx={boxStyles}
-            key={course.id}
-            // borderTop="8px"
-            // borderColor="#0B5CFF"
-            bg="white.100"
-            maxW="sm"
-            width="100%"
-            mx="auto"
-            boxSizing="border-box"
-          >
-            <Image src={course.image} alt={course.title} w="100%" />
-            <Box color="gray.700">
-              <Heading as="h3" size="sm">
-                {course.title}
-              </Heading>
-              <Text>by {course.author}</Text>
-            </Box>
+          <NavLink to="/media">
+            <Box
+              sx={boxStyles}
+              key={course.id}
+              // borderTop="8px"
+              // borderColor="#0B5CFF"
+              bg="white.100"
+              maxW="sm"
+              width="100%"
+              mx="auto"
+              boxSizing="border-box"
+            >
+              <Image src={course.image} alt={course.title} w="100%" />
+              <Box color="gray.700">
+                <Heading as="h3" size="sm">
+                  {course.title}
+                </Heading>
+                <Text>by {course.author}</Text>
+              </Box>
 
-            <Divider borderColor="gray.200" />
+              <Divider borderColor="gray.200" />
 
-            <Box color="gray.500">
-              <Text>{course.description}</Text>
-            </Box>
+              <Box color="gray.500">
+                <Text>{course.description}</Text>
+              </Box>
 
-            <Box mt="auto">
-              <HStack>
-                <Button variant="ghost" leftIcon={<ViewIcon />}>
-                  Watch
-                </Button>
-                <Button variant="ghost" leftIcon={<EditIcon />}>
-                  Comment
-                </Button>
-              </HStack>
+              <Box mt="auto">
+                <HStack>
+                  <Button variant="ghost" leftIcon={<ViewIcon />}>
+                    Watch
+                  </Button>
+                  <Button variant="ghost" leftIcon={<EditIcon />}>
+                    Comment
+                  </Button>
+                </HStack>
+              </Box>
             </Box>
-          </Box>
+          </NavLink>
         ))}
       </SimpleGrid>
     );
@@ -168,6 +172,7 @@ export default function Dashboard() {
 
   return (
     <Box p="20px">
+      <NavBar />
       <BrandHeader />
       {/* <CustomNav /> */}
       <Courses />
