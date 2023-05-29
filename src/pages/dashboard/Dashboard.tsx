@@ -22,9 +22,8 @@ import { Link as NavLink } from "react-router-dom";
 
 import React, { useState, useEffect } from "react";
 import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "../firebase/firebase";
-import logo from "../assets/logoM.png";
-import NavBar from "../components/NavBar/NavBar";
+import { auth } from "../../firebase/firebase";
+import NavBar from "../../components/NavBar/NavBar";
 
 export default function Dashboard() {
   const [user, setUser] = useState(null);
@@ -151,11 +150,11 @@ export default function Dashboard() {
   const BrandHeader = () => {
     return (
       <Box mb={10}>
-        <Box bg="purple.200" alignItems="center">
+        {/* <Box bg="purple.200" alignItems="center">
           <Box mt="4" display="flex" p={2} justifyContent="center">
             <Image src={logo} alt="Logo" h={20} />
           </Box>
-        </Box>
+        </Box> */}
         <Heading as="h1" size="2xl" fontWeight="bold">
           Welcome back
           {/* {userId} */}
@@ -174,7 +173,6 @@ export default function Dashboard() {
     <Box p="20px">
       <NavBar />
       <BrandHeader />
-      {/* <CustomNav /> */}
       <Courses />
     </Box>
   );

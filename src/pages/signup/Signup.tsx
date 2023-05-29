@@ -10,88 +10,68 @@ import {
   Button,
   Heading,
   Text,
-  Image,
   useColorModeValue,
 } from "@chakra-ui/react";
-import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-} from "firebase/auth";
-import { auth } from "../firebase/firebase";
+import { NavLink, useHistory } from "react-router-dom";
 import { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../firebase/firebase";
+import { setAuthenticated } from "../../state/features/auth/authSlice";
 import { useDispatch } from "react-redux";
-import { setAuthenticated } from "../state/features/auth/authSlice";
-import { useAppSelector } from "../state/store";
 
-function Login() {
+function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const history = useHistory();
+  const [appUser, setAppUser] = useState("");
   const dispatch = useDispatch();
-  const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
-
-  console.log("isAuthenticated", isAuthenticated);
 
   const onSubmit = async (e: any) => {
     e.preventDefault();
 
-    await signInWithEmailAndPassword(auth, email, password)
+    await createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        // Signed in
         const user = userCredential.user;
-
         // Dispatch the action to update the authentication state
         dispatch(setAuthenticated());
-
         history.push("/dashboard");
+
         // ...
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        console.log(errorCode, errorMessage);
-        // ..
+        setError(errorMessage);
       });
   };
 
   return (
     <Flex
       minH={"100vh"}
-      direction={{ base: "column-reverse", md: "row" }}
-      align={{ base: "center", md: "stretch" }}
+      align={"center"}
       justify={"center"}
       bg={useColorModeValue("gray.50", "gray.800")}
     >
-      <Box
-        width={{ base: "100%", md: "50%" }}
-        bgPosition="center"
-        bgSize="cover"
-      >
-        <Image src={require("../assets/login.png")} alt="login image" />
-      </Box>
-
-      <Flex
-        direction={{ base: "column", md: "row" }}
-        rounded={"lg"}
-        bg={useColorModeValue("white", "gray.700")}
-        boxShadow={"lg"}
-        p={8}
-        width={{ base: "100%", md: "50%" }}
-      >
-        <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
-          <Stack align={"center"}>
-            <Heading fontSize={"4xl"}>Sign in to your account</Heading>
-            <Text fontSize={"lg"} color={"gray.600"}>
-              to enjoy all of our cool <Link color={"blue.400"}>features</Link>{" "}
-              ✌️
-            </Text>
-          </Stack>
-          <Box>
+      <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
+        <Stack align={"center"}>
+          <Heading fontSize={"4xl"}>Sign up for an account</Heading>
+          {/* <Text fontSize={"lg"} color={"gray.600"}>
+            to enjoy all of our cool <Link color={"blue.400"}>features</Link> ✌️
+          </Text> */}
+        </Stack>
+        <Box
+          rounded={"lg"}
+          bg={useColorModeValue("white", "gray.700")}
+          boxShadow={"lg"}
+          p={8}
+        >
+          <Stack spacing={4}>
             <FormControl id="email">
               <FormLabel>Email address</FormLabel>
               <Input
                 type="email"
+                // label="Email address"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
@@ -102,6 +82,7 @@ function Login() {
               <FormLabel>Password</FormLabel>
               <Input
                 type="password"
+                // label="Create password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
@@ -125,14 +106,19 @@ function Login() {
                   bg: "blue.500",
                 }}
               >
-                Sign in
+                Sign up
               </Button>
             </Stack>
-          </Box>
-        </Stack>
-      </Flex>
+          </Stack>
+        </Box>
+        <Box>
+          <Text align={"center"}>
+            Already have an account? <NavLink to="/login">Sign in</NavLink>
+          </Text>
+        </Box>
+      </Stack>
     </Flex>
   );
 }
 
-export default Login;
+export default Signup;

@@ -65,7 +65,7 @@ function NavBar() {
                 <Image
                   // width={{ base: "100%", md: "100%" }}
                   height={{ base: "50px", md: "50px" }}
-                  src={require("../../assets/logo.png")}
+                  src={require("../../assets/logoM.png")}
                   alt="KolaLMS"
                 />
               </Box>
@@ -143,6 +143,7 @@ const DesktopNav = () => {
                 href={navItem.href ?? "#"}
                 fontSize={"sm"}
                 fontWeight={500}
+                bg="red.300"
                 color={linkColor}
                 _hover={{
                   textDecoration: "none",
@@ -289,42 +290,16 @@ interface NavItem {
 
 const NAV_ITEMS: Array<NavItem> = [
   {
-    label: "Inspiration",
-    children: [
-      {
-        label: "Explore Design Work",
-        subLabel: "Trending Design to inspire you",
-        href: "#",
-      },
-      {
-        label: "New & Noteworthy",
-        subLabel: "Up-and-coming Designers",
-        href: "#",
-      },
-    ],
+    label: "Home",
+    href: "/signup",
   },
   {
-    label: "Find Work",
-    children: [
-      {
-        label: "Job Board",
-        subLabel: "Find your dream design job",
-        href: "#",
-      },
-      {
-        label: "Freelance Projects",
-        subLabel: "An exclusive list for contract work",
-        href: "#",
-      },
-    ],
+    label: "Dashboard",
+    href: "/dashboard",
   },
   {
-    label: "Learn Design",
-    href: "#",
-  },
-  {
-    label: "About",
-    href: "#about",
+    label: "My Courses",
+    href: "/courses",
   },
 ];
 
