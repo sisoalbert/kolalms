@@ -16,6 +16,8 @@ import { NavLink, useHistory } from "react-router-dom";
 import { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase/firebase";
+import { setAuthenticated } from "../state/features/auth/authSlice";
+import { useDispatch } from "react-redux";
 
 function Signup() {
   const [email, setEmail] = useState("");
@@ -23,8 +25,7 @@ function Signup() {
   const [error, setError] = useState("");
   const history = useHistory();
   const [appUser, setAppUser] = useState("");
-
-  console.log("email", email);
+  const dispatch = useDispatch();
 
   const onSubmit = async (e: any) => {
     e.preventDefault();
@@ -32,9 +33,9 @@ function Signup() {
     await createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
-        console.log(user);
+        // Dispatch the action to update the authentication state
+        dispatch(setAuthenticated());
         history.push("/dashboard");
-        console.log("success");
 
         // ...
       })

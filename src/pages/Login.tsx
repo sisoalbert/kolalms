@@ -20,11 +20,18 @@ import {
 import { auth } from "../firebase/firebase";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setAuthenticated } from "../state/features/auth/authSlice";
+import { useAppSelector } from "../state/store";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const history = useHistory();
+  const dispatch = useDispatch();
+  const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
+
+  console.log("isAuthenticated", isAuthenticated);
 
   const onSubmit = async (e: any) => {
     e.preventDefault();
@@ -33,7 +40,10 @@ function Login() {
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
-        console.log(user);
+
+        // Dispatch the action to update the authentication state
+        dispatch(setAuthenticated());
+
         history.push("/dashboard");
         // ...
       })
