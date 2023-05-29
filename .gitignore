@@ -25,3 +25,5 @@ yarn-error.log*
 #ENV
 .env
 env
+
+firebase.ts
