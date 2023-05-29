@@ -12,7 +12,7 @@ import {
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase/firebase";
@@ -20,6 +20,9 @@ import { auth } from "../firebase/firebase";
 function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const history = useHistory();
+  const [appUser, setAppUser] = useState("");
 
   console.log("email", email);
 
@@ -28,10 +31,9 @@ function Signup() {
 
     await createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        // Signed in
         const user = userCredential.user;
         console.log(user);
-        // navigate("/login");
+        history.push("/dashboard");
         console.log("success");
 
         // ...
@@ -39,8 +41,7 @@ function Signup() {
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        console.log(errorCode, errorMessage);
-        // ..
+        setError(errorMessage);
       });
   };
 
@@ -54,9 +55,9 @@ function Signup() {
       <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
         <Stack align={"center"}>
           <Heading fontSize={"4xl"}>Sign up for an account</Heading>
-          <Text fontSize={"lg"} color={"gray.600"}>
+          {/* <Text fontSize={"lg"} color={"gray.600"}>
             to enjoy all of our cool <Link color={"blue.400"}>features</Link> ✌️
-          </Text>
+          </Text> */}
         </Stack>
         <Box
           rounded={"lg"}
@@ -109,9 +110,11 @@ function Signup() {
             </Stack>
           </Stack>
         </Box>
-        <p>
-          Already have an account? <NavLink to="/login">Sign in</NavLink>
-        </p>
+        <Box>
+          <Text align={"center"}>
+            Already have an account? <NavLink to="/login">Sign in</NavLink>
+          </Text>
+        </Box>
       </Stack>
     </Flex>
   );

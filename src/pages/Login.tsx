@@ -13,8 +13,38 @@ import {
   Image,
   useColorModeValue,
 } from "@chakra-ui/react";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import { auth } from "../firebase/firebase";
+import { useState } from "react";
+import { useHistory } from "react-router-dom";
 
 function Login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const history = useHistory();
+
+  const onSubmit = async (e: any) => {
+    e.preventDefault();
+
+    await signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        console.log(user);
+        history.push("/dashboard");
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode, errorMessage);
+        // ..
+      });
+  };
+
   return (
     <Flex
       minH={"100vh"}
@@ -50,11 +80,23 @@ function Login() {
           <Box>
             <FormControl id="email">
               <FormLabel>Email address</FormLabel>
-              <Input type="email" />
+              <Input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                placeholder="Email address"
+              />
             </FormControl>
             <FormControl id="password">
               <FormLabel>Password</FormLabel>
-              <Input type="password" />
+              <Input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                placeholder="Password"
+              />
             </FormControl>
             <Stack spacing={10}>
               <Stack
@@ -66,6 +108,7 @@ function Login() {
                 <Link color={"blue.400"}>Forgot password?</Link>
               </Stack>
               <Button
+                onClick={onSubmit}
                 bg={"blue.400"}
                 color={"white"}
                 _hover={{
