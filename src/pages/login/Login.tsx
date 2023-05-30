@@ -12,6 +12,7 @@ import {
   Text,
   Image,
   useColorModeValue,
+  Alert,
 } from "@chakra-ui/react";
 import {
   createUserWithEmailAndPassword,
@@ -28,13 +29,16 @@ function Login() {
   const [email, setEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const history = useHistory();
   const dispatch = useDispatch();
+
   const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
 
   console.log("isAuthenticated", isAuthenticated);
 
   const onSubmit = async (e: any) => {
+    setErrorMessage("");
     setIsLoading(true);
     e.preventDefault();
 
@@ -54,7 +58,19 @@ function Login() {
 
         const errorCode = error.code;
         const errorMessage = error.message;
-        console.log(errorCode, errorMessage);
+        if (errorCode === "auth/invalid-email") {
+          // The email address is invalid
+          alert("Please enter a valid email address");
+          setErrorMessage("Please enter a valid email address");
+        } else if (errorCode === "auth/wrong-password") {
+          // The password is incorrect
+          alert("Please enter the correct password");
+          setErrorMessage("Please enter the correct password");
+        } else {
+          // Some other error occurred
+          alert("An error occurred while signing in");
+          setErrorMessage("An error occurred while signing in");
+        }
         // ..
       });
   };
@@ -135,6 +151,11 @@ function Login() {
                 Sign in
               </Button>
             </Stack>
+            {errorMessage && (
+              <Alert variant="error">
+                <Text color="red">{errorMessage}</Text>
+              </Alert>
+            )}
           </Box>
         </Stack>
       </Flex>

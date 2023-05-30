@@ -10,6 +10,8 @@ import {
   Button,
   Heading,
   Text,
+  Alert,
+  Toast,
   useColorModeValue,
 } from "@chakra-ui/react";
 import { NavLink, useHistory } from "react-router-dom";
@@ -108,6 +110,10 @@ function Signup() {
               >
                 Sign up
               </Button>
+              <Alert variant="error">
+                <h1>Error!</h1>
+                <p>Something went wrong.</p>
+              </Alert>
             </Stack>
           </Stack>
         </Box>

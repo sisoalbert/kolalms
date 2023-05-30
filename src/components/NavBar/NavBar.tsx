@@ -143,7 +143,7 @@ const DesktopNav = () => {
                 href={navItem.href ?? "#"}
                 fontSize={"sm"}
                 fontWeight={500}
-                bg="red.300"
+                // bg="red.300"
                 color={linkColor}
                 _hover={{
                   textDecoration: "none",
@@ -291,7 +291,7 @@ interface NavItem {
 const NAV_ITEMS: Array<NavItem> = [
   {
     label: "Home",
-    href: "/signup",
+    href: "/home",
   },
   {
     label: "Dashboard",

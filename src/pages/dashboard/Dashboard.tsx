@@ -170,10 +170,12 @@ export default function Dashboard() {
   };
 
   return (
-    <Box p="20px">
+    <>
       <NavBar />
-      <BrandHeader />
-      <Courses />
-    </Box>
+      <Box p="20px">
+        <BrandHeader />
+        <Courses />
+      </Box>
+    </>
   );
 }
