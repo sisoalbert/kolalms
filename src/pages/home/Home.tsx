@@ -14,8 +14,16 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import NavBar from "../../components/NavBar/NavBar";
+import { getAnalytics, logEvent } from "firebase/analytics";
 
 export default function CallToActionWithVideo() {
+  const analytics = getAnalytics();
+
+  logEvent(analytics, "home_start", {
+    content_type: "image",
+    content_id: "P12453",
+  });
+
   return (
     <>
       <NavBar />
@@ -58,6 +66,12 @@ export default function CallToActionWithVideo() {
                 colorScheme={"black"}
                 bg={"#0B5CFF"}
                 _hover={{ bg: "black.500" }}
+                onClick={() => {
+                  logEvent(analytics, "Get started button", {
+                    content_type: "image",
+                    content_id: "P12453",
+                  });
+                }}
               >
                 Get started
               </Button>
