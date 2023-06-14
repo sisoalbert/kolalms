@@ -61,28 +61,8 @@ export default function Dashboard() {
       title: "Course 1",
       author: "Author 1",
       description: "Course 1 description",
-      image: "http://placekitten.com/g/300/200",
-    },
-    {
-      id: 2,
-      title: "Course 2",
-      author: "Author 2",
-      description: "Course 2 description",
-      image: "http://placekitten.com/g/300/200",
-    },
-    {
-      id: 3,
-      title: "Course 3",
-      author: "Author 2",
-      description: "Course 2 description",
-      image: "http://placekitten.com/g/300/200",
-    },
-    {
-      id: 4,
-      title: "Course 4",
-      author: "Author 2",
-      description: "Course 2 description",
-      image: "http://placekitten.com/g/300/200",
+      image:
+        "https://res.cloudinary.com/dlnour8d7/image/upload/v1686051076/kolalms/course_rqdnla.png",
     },
   ];
 
